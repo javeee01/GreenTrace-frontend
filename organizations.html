@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Manage Organizations on GreenTrace.">
+    <title>GreenTrace - Organizations</title>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Toast Notifications Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- MAIN WORKSPACE -->
+    <div id="appWorkspace" class="app-container">
+        
+        <!-- Sidebar Navigation will be injected dynamically here -->
+
+        <!-- Main Content Area -->
+        <main class="app-main">
+            <!-- Settings Bar and Top Header will be injected dynamically here -->
+
+            <!-- Content -->
+            <div class="app-content">
+                <section class="fade-in">
+                    <div class="card-section">
+                        <div class="section-header">
+                            <h2>Organizations List</h2>
+                            <button class="btn btn-primary" onclick="openOrgModal()" style="width: auto;">
+                                <i class="fa-solid fa-plus"></i> Add Organization
+                            </button>
+                        </div>
+                        <div class="table-container">
+                            <table class="data-table" id="orgsTable">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Industry</th>
+                                        <th>Country</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Dynamic rows loaded here -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="pagination-container" id="orgsPagination">
+                            <!-- Pagination controls -->
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- MODAL: Add/Edit Organization -->
+    <div id="modalOrg" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="orgModalTitle">Add Organization</h3>
+                <button class="btn-icon" onclick="closeModal('modalOrg')"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="orgForm" onsubmit="submitOrg(event)">
+                <input type="hidden" id="orgId">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="orgName">Organization Name</label>
+                        <input type="text" id="orgName" class="form-input" placeholder="e.g. GreenCorp Ltd" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="orgIndustry">Industry</label>
+                        <input type="text" id="orgIndustry" class="form-input" placeholder="e.g. Manufacturing, Technology" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="orgCountry">Country</label>
+                        <input type="text" id="orgCountry" class="form-input" placeholder="e.g. India, United States" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('modalOrg')" style="width: auto;">Cancel</button>
+                    <button type="submit" class="btn btn-primary" style="width: auto;">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="common.js"></script>
+    <script src="organizations.js"></script>
+</body>
+</html>

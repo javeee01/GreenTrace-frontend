@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Record and track carbon emission activities on GreenTrace.">
+    <title>GreenTrace - Carbon Activities</title>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Toast Notifications Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- MAIN WORKSPACE -->
+    <div id="appWorkspace" class="app-container">
+        
+        <!-- Sidebar Navigation will be injected dynamically here -->
+
+        <!-- Main Content Area -->
+        <main class="app-main">
+            <!-- Settings Bar and Top Header will be injected dynamically here -->
+
+            <!-- Content -->
+            <div class="app-content">
+                <section class="fade-in">
+                    <div class="card-section">
+                        <div class="section-header">
+                            <h2>Carbon Emission Activities Log</h2>
+                            <button class="btn btn-primary" onclick="openActivityModal()" style="width: auto;">
+                                <i class="fa-solid fa-plus"></i> Record Activity
+                            </button>
+                        </div>
+                        
+                        <!-- Filters -->
+                        <div class="filters-bar" id="activityFilters">
+                            <select id="filterActOrg" class="filter-select" onchange="filterActivities()">
+                                <option value="">All Organizations</option>
+                            </select>
+                        </div>
+
+                        <div class="table-container">
+                            <table class="data-table" id="activitiesTable">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Organization</th>
+                                        <th>Activity Date</th>
+                                        <th>Activity Type</th>
+                                        <th>Quantity</th>
+                                        <th>Calculated CO2</th>
+                                        <th>Recorded By</th>
+                                        <th>Notes</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Dynamic rows loaded here -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="pagination-container" id="activitiesPagination">
+                            <!-- Pagination controls -->
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- MODAL: Record/Edit Carbon Activity -->
+    <div id="modalActivity" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="activityModalTitle">Record Carbon Activity</h3>
+                <button class="btn-icon" onclick="closeModal('modalActivity')"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="activityForm" onsubmit="submitActivity(event)">
+                <input type="hidden" id="activityId">
+                <div class="modal-body">
+                    <div class="form-group" id="activityOrgSelectGroup">
+                        <label for="actOrg">Organization</label>
+                        <select id="actOrg" class="form-input">
+                            <!-- Populated Dynamically -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="actFactor">Emission Factor Type</label>
+                        <select id="actFactor" class="form-input" required>
+                            <!-- Populated Dynamically -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="actQuantity">Quantity</label>
+                        <input type="number" step="0.01" id="actQuantity" class="form-input" placeholder="e.g. 500" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="actDate">Activity Date</label>
+                        <input type="date" id="actDate" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="actNotes">Notes</label>
+                        <textarea id="actNotes" class="form-input" rows="3" placeholder="e.g. Q2 factory utility billing details..."></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('modalActivity')" style="width: auto;">Cancel</button>
+                    <button type="submit" class="btn btn-primary" style="width: auto;">Save Activity</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="common.js"></script>
+    <script src="activities.js"></script>
+</body>
+</html>

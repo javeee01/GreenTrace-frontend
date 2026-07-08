@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GreenTrace Carbon Footprint Tracking System - Login or Register.">
+    <title>GreenTrace - Sign In / Register</title>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Toast Notifications Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- AUTHENTICATION CARD -->
+    <div class="auth-container fade-in">
+        <div class="auth-card">
+            <div class="auth-logo">
+                <i class="fa-solid fa-leaf"></i> Green<span>Trace</span>
+            </div>
+            
+            <div class="auth-tabs">
+                <div id="tabLogin" class="auth-tab active" onclick="switchAuthTab('login')">Sign In</div>
+                <div id="tabRegister" class="auth-tab" onclick="switchAuthTab('register')">Register</div>
+            </div>
+
+            <!-- Login Form -->
+            <form id="loginForm" class="auth-form active" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="loginEmail">Email Address</label>
+                    <input type="email" id="loginEmail" class="form-input" placeholder="admin@greentrace.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" class="form-input" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa-solid fa-right-to-bracket"></i> Sign In
+                </button>
+                <div style="margin-top: 15px; font-size: 11px; text-align: center; color: var(--text-muted);">
+                    Seed Admin: <strong>admin@greentrace.com</strong> / <strong>admin123</strong><br>
+                    Seed Auditor: <strong>ravi@greencorp.com</strong> / <strong>password123</strong>
+                </div>
+            </form>
+
+            <!-- Register Form -->
+            <form id="registerForm" class="auth-form" onsubmit="handleRegister(event)">
+                <div class="form-group">
+                    <label for="regName">Full Name</label>
+                    <input type="text" id="regName" class="form-input" placeholder="Ravi Kumar" required>
+                </div>
+                <div class="form-group">
+                    <label for="regEmail">Email Address</label>
+                    <input type="email" id="regEmail" class="form-input" placeholder="ravi@greencorp.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="regPassword">Password (min. 6 characters)</label>
+                    <input type="password" id="regPassword" class="form-input" placeholder="••••••••" required minlength="6">
+                </div>
+                <div class="form-group">
+                    <label for="regRole">Role</label>
+                    <select id="regRole" class="form-input" onchange="toggleRegOrgSelect()" required>
+                        <option value="ROLE_ENVIRONMENTAL_AUDITOR">Environmental Auditor</option>
+                        <option value="ROLE_SYSTEM_GOVERNOR">System Governor</option>
+                    </select>
+                </div>
+                <div class="form-group" id="regOrgGroup">
+                    <label for="regOrgId">Organization ID</label>
+                    <input type="number" id="regOrgId" class="form-input" placeholder="e.g. 1" min="1">
+                    <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">
+                        Sample IDs: 1 (GreenCorp), 2 (EcoTech), 3 (BlueSky), 4 (ClearWater)
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa-solid fa-user-plus"></i> Create Account
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Settings Bar at bottom of screen -->
+    <div class="settings-bar" style="position: fixed; bottom: 0; left: 0; width: 100%; border-top: 1px solid var(--border-color); border-bottom: none;">
+        <div>API URL: <strong id="currentApiUrl">https://greentrace-backend-gfu1.onrender.com</strong></div>
+        <button onclick="openSettingsModal()" class="api-settings-btn"><i class="fa-solid fa-gear"></i> Change</button>
+    </div>
+
+    <!-- Script imports -->
+    <script src="common.js"></script>
+    <script src="login.js"></script>
+</body>
+</html>

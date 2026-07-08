@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Manage User Accounts on GreenTrace.">
+    <title>GreenTrace - User Accounts</title>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Toast Notifications Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- MAIN WORKSPACE -->
+    <div id="appWorkspace" class="app-container">
+        
+        <!-- Sidebar Navigation will be injected dynamically here -->
+
+        <!-- Main Content Area -->
+        <main class="app-main">
+            <!-- Settings Bar and Top Header will be injected dynamically here -->
+
+            <!-- Content -->
+            <div class="app-content">
+                <section class="fade-in">
+                    <div class="card-section">
+                        <div class="section-header">
+                            <h2>User Accounts List</h2>
+                            <button class="btn btn-primary" onclick="openUserModal()" style="width: auto;">
+                                <i class="fa-solid fa-user-plus"></i> Add User Account
+                            </button>
+                        </div>
+                        <div class="table-container">
+                            <table class="data-table" id="usersTable">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Role</th>
+                                        <th>Organization</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Dynamic rows loaded here -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="pagination-container" id="usersPagination">
+                            <!-- Pagination controls -->
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- MODAL: Add/Edit User -->
+    <div id="modalUser" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="userModalTitle">Add User Account</h3>
+                <button class="btn-icon" onclick="closeModal('modalUser')"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="userForm" onsubmit="submitUser(event)">
+                <input type="hidden" id="userId">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="userName">Full Name</label>
+                        <input type="text" id="userName" class="form-input" placeholder="e.g. Alice Smith" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="userEmail">Email Address</label>
+                        <input type="email" id="userEmail" class="form-input" placeholder="e.g. alice@company.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="userPassword">Password <span id="userPasswordHelp" style="font-size: 11px; color: var(--text-muted);">(Leave blank to keep existing)</span></label>
+                        <input type="password" id="userPassword" class="form-input" placeholder="••••••••" minlength="6">
+                    </div>
+                    <div class="form-group">
+                        <label for="userRole">Role</label>
+                        <select id="userRole" class="form-input" onchange="toggleUserOrgSelect()" required>
+                            <option value="ROLE_ENVIRONMENTAL_AUDITOR">Environmental Auditor</option>
+                            <option value="ROLE_SYSTEM_GOVERNOR">System Governor</option>
+                        </select>
+                    </div>
+                    <div class="form-group" id="userOrgGroup">
+                        <label for="userOrg">Organization</label>
+                        <select id="userOrg" class="form-input">
+                            <!-- Populated Dynamically -->
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('modalUser')" style="width: auto;">Cancel</button>
+                    <button type="submit" class="btn btn-primary" style="width: auto;">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="common.js"></script>
+    <script src="users.js"></script>
+</body>
+</html>

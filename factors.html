@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Manage Carbon Emission Factors on GreenTrace.">
+    <title>GreenTrace - Emission Factors</title>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Toast Notifications Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- MAIN WORKSPACE -->
+    <div id="appWorkspace" class="app-container">
+        
+        <!-- Sidebar Navigation will be injected dynamically here -->
+
+        <!-- Main Content Area -->
+        <main class="app-main">
+            <!-- Settings Bar and Top Header will be injected dynamically here -->
+
+            <!-- Content -->
+            <div class="app-content">
+                <section class="fade-in">
+                    <div class="card-section">
+                        <div class="section-header">
+                            <h2>Emission Factors List</h2>
+                            <button class="btn btn-primary" onclick="openFactorModal()" style="width: auto;">
+                                <i class="fa-solid fa-plus"></i> Add Factor
+                            </button>
+                        </div>
+                        <div class="table-container">
+                            <table class="data-table" id="factorsTable">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Activity Type</th>
+                                        <th>Description</th>
+                                        <th>CO2 (kg) per Unit</th>
+                                        <th>Unit</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Dynamic rows loaded here -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="pagination-container" id="factorsPagination">
+                            <!-- Pagination controls -->
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- MODAL: Add/Edit Factor -->
+    <div id="modalFactor" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="factorModalTitle">Add Emission Factor</h3>
+                <button class="btn-icon" onclick="closeModal('modalFactor')"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="factorForm" onsubmit="submitFactor(event)">
+                <input type="hidden" id="factorId">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="facActivityType">Activity Type</label>
+                        <input type="text" id="facActivityType" class="form-input" placeholder="e.g. Electricity Consumption" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="facDescription">Description</label>
+                        <input type="text" id="facDescription" class="form-input" placeholder="e.g. Grid electricity usage in kWh" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="facKgCo2">kg CO2 per Unit</label>
+                        <input type="number" step="0.00001" id="facKgCo2" class="form-input" placeholder="e.g. 0.82" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="facUnit">Unit</label>
+                        <input type="text" id="facUnit" class="form-input" placeholder="e.g. kWh, liter, kg" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('modalFactor')" style="width: auto;">Cancel</button>
+                    <button type="submit" class="btn btn-primary" style="width: auto;">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="common.js"></script>
+    <script src="factors.js"></script>
+</body>
+</html>

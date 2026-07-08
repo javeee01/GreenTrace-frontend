@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GreenTrace Carbon Footprint Dashboard - Summary metrics and environmental reports.">
+    <title>GreenTrace - Dashboard</title>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Toast Notifications Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- MAIN WORKSPACE -->
+    <div id="appWorkspace" class="app-container">
+        
+        <!-- Sidebar Navigation will be injected dynamically here -->
+
+        <!-- Main Content Area -->
+        <main class="app-main">
+            <!-- Settings Bar and Top Header will be injected dynamically here -->
+
+            <!-- Dashboard Content -->
+            <div class="app-content">
+
+                <!-- SECTION: GOVERNOR VIEW -->
+                <div id="govDashboard" style="display: none;" class="fade-in">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-details">
+                                <h3>Total Organizations</h3>
+                                <div class="stat-value" id="govStatOrgs">0</div>
+                            </div>
+                            <div class="stat-icon"><i class="fa-solid fa-building"></i></div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-details">
+                                <h3>Total User Accounts</h3>
+                                <div class="stat-value" id="govStatUsers">0</div>
+                            </div>
+                            <div class="stat-icon"><i class="fa-solid fa-users"></i></div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-details">
+                                <h3>Emission Factors</h3>
+                                <div class="stat-value" id="govStatFactors">0</div>
+                            </div>
+                            <div class="stat-icon"><i class="fa-solid fa-industry"></i></div>
+                        </div>
+                    </div>
+
+                    <div class="charts-grid">
+                        <div class="chart-card">
+                            <div class="chart-card-header">
+                                <h3>Organization Emissions (kg CO2e)</h3>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="govCompareChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="chart-card">
+                            <div class="chart-card-header">
+                                <h3>Industry Distribution</h3>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="govIndustryChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION: AUDITOR VIEW -->
+                <div id="audDashboard" style="display: none;" class="fade-in">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-details">
+                                <h3>Organization</h3>
+                                <div class="stat-value" id="audStatOrgName" style="font-size: 20px;">-</div>
+                            </div>
+                            <div class="stat-icon"><i class="fa-solid fa-building"></i></div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-details">
+                                <h3>Total Emissions Recorded</h3>
+                                <div class="stat-value" id="audStatEmissions">0 kg</div>
+                            </div>
+                            <div class="stat-icon"><i class="fa-solid fa-cloud"></i></div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-details">
+                                <h3>Activities Logged</h3>
+                                <div class="stat-value" id="audStatActivities">0</div>
+                            </div>
+                            <div class="stat-icon"><i class="fa-solid fa-bolt"></i></div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-details">
+                                <h3>Reports Generated</h3>
+                                <div class="stat-value" id="audStatReports">0</div>
+                            </div>
+                            <div class="stat-icon"><i class="fa-solid fa-file-invoice"></i></div>
+                        </div>
+                    </div>
+
+                    <div class="charts-grid">
+                        <div class="chart-card" style="grid-column: span 2; height: 400px;">
+                            <div class="chart-card-header">
+                                <h3>Monthly Emissions Trend (kg CO2e)</h3>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="audMonthlyChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- ChartJS and App Logic -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="common.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html>

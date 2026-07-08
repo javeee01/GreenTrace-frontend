@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Generate and view environmental footprint reports on GreenTrace.">
+    <title>GreenTrace - Footprint Reports</title>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Toast Notifications Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- MAIN WORKSPACE -->
+    <div id="appWorkspace" class="app-container">
+        
+        <!-- Sidebar Navigation will be injected dynamically here -->
+
+        <!-- Main Content Area -->
+        <main class="app-main">
+            <!-- Settings Bar and Top Header will be injected dynamically here -->
+
+            <!-- Content -->
+            <div class="app-content">
+                <section class="fade-in">
+                    <div class="card-section">
+                        <div class="section-header">
+                            <h2>Carbon Footprint Reports</h2>
+                            <button class="btn btn-primary" onclick="openReportModal()" style="width: auto;">
+                                <i class="fa-solid fa-file-signature"></i> Generate Footprint Report
+                            </button>
+                        </div>
+                        
+                        <!-- Filters -->
+                        <div class="filters-bar" id="reportFilters">
+                            <select id="filterRepOrg" class="filter-select" onchange="filterReports()">
+                                <option value="">All Organizations</option>
+                            </select>
+                        </div>
+
+                        <div class="table-container">
+                            <table class="data-table" id="reportsTable">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Organization</th>
+                                        <th>Period Start</th>
+                                        <th>Period End</th>
+                                        <th>Total CO2 Emissions</th>
+                                        <th>Generated At</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Dynamic rows loaded here -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="pagination-container" id="reportsPagination">
+                            <!-- Pagination controls -->
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- MODAL: Generate Footprint Report -->
+    <div id="modalReport" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Generate Carbon Footprint Report</h3>
+                <button class="btn-icon" onclick="closeModal('modalReport')"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="reportForm" onsubmit="submitReport(event)">
+                <div class="modal-body">
+                    <div class="form-group" id="reportOrgSelectGroup">
+                        <label for="repOrg">Organization</label>
+                        <select id="repOrg" class="form-input">
+                            <!-- Populated Dynamically -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="repStart">Period Start</label>
+                        <input type="date" id="repStart" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="repEnd">Period End</label>
+                        <input type="date" id="repEnd" class="form-input" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('modalReport')" style="width: auto;">Cancel</button>
+                    <button type="submit" class="btn btn-primary" style="width: auto;">Generate Report</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="common.js"></script>
+    <script src="reports.js"></script>
+</body>
+</html>
